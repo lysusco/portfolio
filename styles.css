@@ -542,6 +542,27 @@ button:focus-visible {
 
 .lightbox-close:hover { background: rgba(255,255,255,.3); }
 
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.3);
+  color: #fff;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 2rem;
+  line-height: 1;
+  transition: background 0.2s ease;
+  z-index: 2;
+}
+
+.lightbox-nav:hover { background: rgba(255,255,255,.3); }
+.lightbox-prev { left: 24px; }
+.lightbox-next { right: 24px; }
+
 .carousel-slide { cursor: zoom-in; }
 
 /* Responsive */

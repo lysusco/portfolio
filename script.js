@@ -105,11 +105,21 @@
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightbox-img");
   const lightboxClose = document.getElementById("lightbox-close");
+  const lightboxPrev = document.getElementById("lightbox-prev");
+  const lightboxNext = document.getElementById("lightbox-next");
 
   if (lightbox && lightboxImg && lightboxClose) {
-    function openLightbox(src, alt) {
-      lightboxImg.src = src;
-      lightboxImg.alt = alt || "";
+    const slides = Array.from(document.querySelectorAll(".carousel-slide img"));
+    let currentIndex = 0;
+
+    function showImage(i) {
+      currentIndex = (i + slides.length) % slides.length;
+      lightboxImg.src = slides[currentIndex].src;
+      lightboxImg.alt = slides[currentIndex].alt || "";
+    }
+
+    function openLightbox(i) {
+      showImage(i);
       lightbox.classList.add("open");
       lightbox.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
@@ -121,21 +131,40 @@
       document.body.style.overflow = "";
     }
 
-    document.querySelectorAll(".carousel-slide img").forEach(function (img) {
+    function next() { showImage(currentIndex + 1); }
+    function prev() { showImage(currentIndex - 1); }
+
+    slides.forEach(function (img, idx) {
       img.addEventListener("click", function (e) {
         e.stopPropagation();
-        openLightbox(img.src, img.alt);
+        openLightbox(idx);
       });
     });
+
+    if (lightboxPrev) lightboxPrev.addEventListener("click", function (e) { e.stopPropagation(); prev(); });
+    if (lightboxNext) lightboxNext.addEventListener("click", function (e) { e.stopPropagation(); next(); });
 
     lightboxClose.addEventListener("click", closeLightbox);
     lightbox.addEventListener("click", function (e) {
       if (e.target === lightbox) closeLightbox();
     });
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && lightbox.classList.contains("open")) {
-        closeLightbox();
-      }
+      if (!lightbox.classList.contains("open")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
     });
+
+    // Swipe tactil
+    let startX = 0;
+    lightbox.addEventListener("touchstart", function (e) {
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+    lightbox.addEventListener("touchend", function (e) {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) next(); else prev();
+      }
+    }, { passive: true });
   }
 })();
