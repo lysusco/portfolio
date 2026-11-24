@@ -455,6 +455,21 @@ button:focus-visible {
   transform: scale(1.2);
 }
 
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: auto;
+}
+
+.captures-inline { margin-top: 20px; }
+
+.captures-title {
+  margin: 0 0 12px;
+  font-size: 1.05rem;
+  color: var(--muted);
+}
+
 /* Responsive */
 @media (max-width: 720px) {
   .menu-toggle { display: block; }
