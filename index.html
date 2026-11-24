@@ -339,8 +339,12 @@
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar imagen">✕</button>
     <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Imagen anterior">‹</button>
-    <img class="lightbox-img" id="lightbox-img" alt="" />
+    <div class="lightbox-stage">
+      <img class="lightbox-img" id="lightbox-img" alt="" />
+      <div class="lightbox-counter" id="lightbox-counter">1 / 5</div>
+    </div>
     <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Imagen siguiente">›</button>
+    <div class="lightbox-thumbs" id="lightbox-thumbs"></div>
   </div>
 
   <script src="script.js"></script>
