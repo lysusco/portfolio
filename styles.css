@@ -189,6 +189,26 @@ button:focus-visible {
   color: var(--muted);
 }
 
+/* About */
+.about {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--surface);
+  box-shadow: var(--shadow);
+  flex-shrink: 0;
+}
+
+.about-text { flex: 1; min-width: 240px; }
+
 /* Skills */
 .skills-grid {
   display: grid;
