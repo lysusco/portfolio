@@ -362,6 +362,53 @@ button:focus-visible {
   border-top: 1px solid var(--border);
 }
 
+/* Gallery */
+.section-intro {
+  color: var(--muted);
+  margin: -8px 0 24px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 20px;
+}
+
+.gallery-item {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease;
+}
+
+.gallery-item:hover { transform: translateY(-4px); }
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.gallery-item figcaption {
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-weight: 500;
+  border-top: 1px solid var(--border);
+}
+
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: auto;
+}
+
 /* Responsive */
 @media (max-width: 720px) {
   .menu-toggle { display: block; }
