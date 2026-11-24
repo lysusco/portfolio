@@ -36,17 +36,17 @@
     });
   }
 
-  // Carrusel de capturas
-  const track = document.getElementById("carousel-track");
-  const prevBtn = document.getElementById("carousel-prev");
-  const nextBtn = document.getElementById("carousel-next");
-  const dotsContainer = document.getElementById("carousel-dots");
+  // Carruseles de capturas (soporta varios en la página)
+  document.querySelectorAll(".carousel").forEach(function (carousel) {
+    const track = carousel.querySelector(".carousel-track");
+    const prevBtn = carousel.querySelector(".carousel-prev");
+    const nextBtn = carousel.querySelector(".carousel-next");
+    const dotsContainer = carousel.querySelector(".carousel-dots");
+    if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
 
-  if (track && prevBtn && nextBtn && dotsContainer) {
     const slides = Array.from(track.children);
     let index = 0;
 
-    // Crear dots
     slides.forEach(function (_, i) {
       const dot = document.createElement("button");
       dot.className = "carousel-dot" + (i === 0 ? " active" : "");
@@ -75,10 +75,7 @@
       goTo(index + 1);
     });
 
-    // Teclado
     document.addEventListener("keydown", function (e) {
-      const carousel = document.getElementById("carousel");
-      if (!carousel) return;
       const rect = carousel.getBoundingClientRect();
       const inView = rect.top < window.innerHeight && rect.bottom > 0;
       if (!inView) return;
@@ -86,7 +83,6 @@
       if (e.key === "ArrowRight") goTo(index + 1);
     });
 
-    // Swipe táctil
     let startX = 0;
     let isDragging = false;
     track.addEventListener("touchstart", function (e) {
@@ -104,5 +100,5 @@
         else goTo(index - 1);
       }
     }, { passive: true });
-  }
+  });
 })();
